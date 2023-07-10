@@ -24,7 +24,8 @@ class Zezika extends CI_Controller {
         $id_vokatra = $this->input->post('vokatra');
         $id_zezika = $this->input->post('zezika');
         $lanja_zezika = $this->input->post('lanja_zezika');
-        $this->Zezika_model->save($id_vokatra, $id_zezika, $lanja_zezika);
+        $date_zezika = $this->input->post('date_zezika');
+        $this->Zezika_model->save($id_vokatra, $id_zezika, $lanja_zezika, $date_zezika);
         redirect(base_url('zezika?success'));
     }
 
@@ -40,5 +41,9 @@ class Zezika extends CI_Controller {
         $data = [];
         $data["liste_combinaison"] = $combinaison_efficacite;
         $this->load->view('efficacite-combinaison', $data);
+    }
+
+    public function efficacite_rapport_prix(){
+        var_dump($this->Zezika_model->get_liste_prix_moyen_zezika());
     }
 }

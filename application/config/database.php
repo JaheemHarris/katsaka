@@ -120,10 +120,10 @@ $db['mysql'] = array(
 
 $db['oracle'] = array(
     'dsn'      => '',
-    'hostname' => '(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=XE)))',
-    'username' => 'your_username',
-    'password' => 'your_password',
-    'database' => 'your_database',
+    'hostname' => 'localhost/xe',
+    'username' => 'katsaka',
+    'password' => 'jaheem',
+    'database' => '',
     'dbdriver' => 'oci8',
     'dbprefix' => '',
     'pconnect' => false,

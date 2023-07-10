@@ -37,10 +37,18 @@
             return $result;
         }
 
-        public function save($id_vokatra, $id_zezika, $lanja_zezika){
+        public function get_liste_prix_moyen_zezika(){
+            $this->load->database('oracle');
+			$query = $this->db->get('view_prix_moyen_zezika');
+			$result = $query->result();
+            $this->db->close();
+            return $result;
+        }
+
+        public function save($id_vokatra, $id_zezika, $lanja_zezika, $date_zezika){
             $this->load->database('mysql');
-            $sql = "INSERT INTO zezika_parcelle(id_vokatra, id_zezika, lanja_zezika) VALUES (?, ?, ?)";
-            $result = $this->db->query($sql, array($id_vokatra, $id_zezika, $lanja_zezika));
+            $sql = "INSERT INTO zezika_parcelle(id_vokatra, id_zezika, lanja_zezika, date_zezika) VALUES (?, ?, ?, ?)";
+            $result = $this->db->query($sql, array($id_vokatra, $id_zezika, $lanja_zezika, $date_zezika));
             $this->db->close();
             return $result;
         }

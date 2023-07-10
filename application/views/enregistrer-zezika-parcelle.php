@@ -217,6 +217,12 @@
 									<input type="number" class="form-control" id="lanja_zezika" name="lanja_zezika">
 								</div>
 							</div>
+                            <div class="row mb-3">
+								<label for="date_zezika" class="col-sm-4 col-form-label">Date</label>
+								<div class="col-sm-8">
+									<input type="date" class="form-control" id="date_zezika" name="date_zezika">
+								</div>
+							</div>
 							<div class="text-center">
 								<button type="submit" class="btn btn-primary">Enregistrer</button>
 								<button type="reset" class="btn btn-secondary">Annuler</button>

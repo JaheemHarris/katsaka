@@ -1,6 +1,56 @@
--- CREATE DATABASE katsaka;
+CREATE TABLE responsable(
+    id_reponsable INT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(40)
+);
 
-USE katsaka;
+INSERT INTO responsable (nom) VALUES ('Dezy');
+INSERT INTO responsable (nom) VALUES ('Lom');
+INSERT INTO responsable (nom) VALUES ('Bray');
+
+CREATE TABLE parcelle(
+    id_parcelle INT PRIMARY KEY AUTO_INCREMENT,
+    id_reponsable INT NOT NULL,
+    libelle VARCHAR(40) NOT NULL,
+    FOREIGN KEY (id_reponsable) REFERENCES responsable(id_reponsable)
+);
+
+INSERT INTO parcelle (id_reponsable, libelle) VALUES (1, 'Parcelle 1');
+INSERT INTO parcelle (id_reponsable, libelle) VALUES (2, 'Parcelle 2');
+INSERT INTO parcelle (id_reponsable, libelle) VALUES (3, 'Parcelle 3');
+
+CREATE OR REPLACE VIEW view_parcelle AS 
+SELECT
+    p.id_parcelle,
+    r.id_reponsable,
+    r.nom as responsable,
+    p.libelle
+FROM parcelle p
+JOIN responsable r
+ON p.id_reponsable = r.id_reponsable;
+
+CREATE TABLE vokatra(
+    id_vokatra INT PRIMARY KEY AUTO_INCREMENT,
+    id_parcelle INT NOT NULL,
+    tongony INT DEFAULT 0,
+    taolany INT DEFAULT 0,
+    lanja DECIMAL DEFAULT 0,
+    date_vokatra DATE,
+    FOREIGN KEY (id_parcelle) REFERENCES parcelle(id_parcelle)
+);
+ALTER TABLE vokatra ADD COLUMN additif BOOLEAN;
+
+CREATE TABLE prix_katsaka(
+    id_prix_katsaka INT PRIMARY KEY AUTO_INCREMENT,
+    prix_kg DECIMAL DEFAULT 0,
+    date_prix DATE
+);
+
+INSERT INTO prix_katsaka(prix_kg, date_prix) VALUES (850, '2023-8-1');
+INSERT INTO prix_katsaka(prix_kg, date_prix) VALUES (890, '2023-9-1');
+INSERT INTO prix_katsaka(prix_kg, date_prix) VALUES (900, '2023-10-1');
+INSERT INTO prix_katsaka(prix_kg, date_prix) VALUES (850, '2023-11-1');
+INSERT INTO prix_katsaka(prix_kg, date_prix) VALUES (940, '2023-12-1');
+
 
 CREATE TABLE zezika(
 	id_zezika INT PRIMARY KEY AUTO_INCREMENT,
@@ -110,11 +160,3 @@ INSERT INTO achat_zezika(id_zezika, lanja_vidina, prix, date_achat) VALUES (3, 1
 
 INSERT INTO achat_zezika(id_zezika, lanja_vidina, prix, date_achat) VALUES (1, 100, 1000, '2023-06-30');
 INSERT INTO achat_zezika(id_zezika, lanja_vidina, prix, date_achat) VALUES (2, 100, 1000, '2023-06-30');
-INSERT INTO achat_zezika(id_zezika, lanja_vidina, prix, date_achat) VALUES (3, 100, 1000, '2023-06-30');
-
--- CREATE OR REPLACE VIEW view_prix_moyen_zezika AS
--- SELECT 
---     ID_ZEZIKA, 
---     AVG(PRIX) AS PRIX_MOYEN 
--- FROM achat_zezika 
--- GROUP BY ID_ZEZIKA;

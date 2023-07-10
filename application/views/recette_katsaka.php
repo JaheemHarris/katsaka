@@ -6,12 +6,14 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>Katsaka</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
     <!-- Favicons -->
     <link href="<?php echo base_url("assets/img/favicon.png") ?>" rel="icon">
     <link href="<?php echo base_url("assets/img/apple-touch-icon.png") ?>" rel="apple-touch-icon">
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js-bootstrap-css/1.2.1/typeaheadjs.min.css" integrity="sha512-jG7NmK8Pm8iKEjw8aIWc+GVFBM33O/Ow4U0Xw34D5yyST0fgmlcV6shsghOXexDsAqtE2TCM6WwNy35qX8E6ng==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js-bootstrap-css/1.2.1/typeaheadjs.min.css" integrity="sha512-jG7NmK8Pm8iKEjw8aIWc+GVFBM33O/Ow4U0Xw34D5yyST0fgmlcV6shsghOXexDsAqtE2TCM6WwNy35qX8E6ng==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -21,8 +23,10 @@
     <link href="<?php echo base_url("assets/vendor/bootstrap/css/bootstrap.min.css") ?>" rel="stylesheet">
     <link href="<?php echo base_url("assets/vendor/bootstrap-icons/bootstrap-icons.css") ?>" rel="stylesheet">
     <link href="<?php echo base_url("assets/vendor/boxicons/css/boxicons.min.css") ?>" rel="stylesheet">
+    <link href="<?php echo base_url("assets/vendor/quill/quill.snow.css") ?>" rel="stylesheet">
+    <link href="<?php echo base_url("assets/vendor/quill/quill.bubble.css") ?>" rel="stylesheet">
     <link href="<?php echo base_url("assets/vendor/remixicon/remixicon.css") ?>" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" integrity="sha256-sWZjHQiY9fvheUAOoxrszw9Wphl3zqfVaz1kZKEvot8=" crossorigin="anonymous">
+    <link href="<?php echo base_url("assets/vendor/simple-datatables/style.css") ?>" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="<?php echo base_url("assets/css/style.css") ?>" rel="stylesheet">
@@ -150,12 +154,17 @@
 
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Vokatra</span><i class="bi bi-chevron-down ms-auto"></i>
+                    <i class="bi bi-menu-button-wide"></i><span>Zezika</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="<?php echo base_url('archive/new') ?>">
                             <i class="bi bi-circle"></i><span>Enregistrement</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('archive/search') ?>">
+                            <i class="bi bi-circle"></i><span>Efficacite</span>
                         </a>
                     </li>
                 </ul>
@@ -169,89 +178,78 @@
 
     <main id="main" class="main">
 
-	<div class="pagetitle">
-		<h1>Enregistrement - Vokatra</h1>
-		<nav>
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="<?php echo base_url('archive') ?>">Katsaka</a></li>
-				<li class="breadcrumb-item">Vokatra</li>
-				<li class="breadcrumb-item active">Enregistrement</li>
-			</ol>
-		</nav>
-	</div>
-	<!-- End Page Title -->
-
-	<section class="section">
-		<div class="row justify-content-center">
-			<div class="col-lg-10">
-
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title">Enregistrement de vokatra</h5>
-
-						<!-- Horizontal Form -->
-						<form class="col-md-8 col-sm-12" method="POST" action="<?php echo base_url('vokatra/enregistrer') ?>">
-							<div class="row mb-3">
-								<label for="parcelle" class="col-sm-4 col-form-label">Parcelle</label>
-								<div class="col-sm-8">
-                                    <select id="parcelle" name="parcelle" class="form-control">
-                                        <?php foreach($parcelles as $parcelle) { ?>
-                                            <option value="<?=$parcelle->id_parcelle ?>"><?=$parcelle->libelle ?></option>
-                                        <?php } ?>
-                                    </select>
-								</div>
-							</div>
-                            <div class="row mb-3">
-								<label for="tongony" class="col-sm-4 col-form-label">Isan'ny tongony</label>
-								<div class="col-sm-8">
-									<input type="number" class="form-control" id="tongony" name="tongony">
-								</div>
-							</div>
-                            <div class="row mb-3">
-								<label for="taolany" class="col-sm-4 col-form-label">Isan'ny taolany (Moyenne)</label>
-								<div class="col-sm-8">
-									<input type="number" class="form-control" id="taolany" name="taolany">
-								</div>
-							</div>
-							<div class="row mb-3">
-								<label for="lanja" class="col-sm-4 col-form-label">Lanjan'ny vokatra (Kg)</label>
-								<div class="col-sm-8">
-									<input type="text" class="form-control" id="lanja" name="lanja">
-								</div>
-							</div>
-                            <div class="row mb-3">
-								<label  class="col-sm-4 col-form-label">Additif</label>
-								<div class="col-sm-8">
-									<input type="radio" id="additif-oui" name="additif" value="0"> Oui
-                                    <input type="radio" id="additif-non" name="additif" value="1"> Non
-								</div>
-							</div>
-							<div class="text-center">
-								<button type="submit" class="btn btn-primary">Enregistrer</button>
-								<button type="reset" class="btn btn-secondary">Annuler</button>
-							</div>
-						</form><!-- End Horizontal Form -->
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</section>
-</main>
-
-<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModal" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        SUCCESS!
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
-      </div>
+    <div class="pagetitle">
+        <h1>Recette</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?php echo base_url('archive') ?>">Katsaka</a></li>
+                <li class="breadcrumb-item">Parcelle</li>
+                <li class="breadcrumb-item active">Recette</li>
+            </ol>
+        </nav>
     </div>
-  </div>
-</div>
+    <!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Recette Katsaka par parcelle</h5>
+
+                        <div>
+                            <form method="POST" class="row" action="<?php echo base_url('vokatra/recette_katsaka') ?>">
+                                <div class="row justify-content-center">
+                                    <div class="form-group col-5">
+                                        <label for="date_recolte">Date Recolte</label>
+                                        <input type="date" class="form-control" id="date_recolte" name="date_recolte" >
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <button class="btn btn-primary col-2" type="submit">Valider</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Table with stripped rows -->
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">IdParcelle</th>
+                                <th scope="col">Parcelle</th>
+                                <th scope="col">Lanja (Kg) </th>
+                                <th scope="col">Recette (Ar)</th>
+                                <th scope="col">Additif (t/f)</th>
+                                <th scope="col">Lanja (Finale) (Kg)</th>
+                                <th scope="col">Recette avec additif (Ar)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <?php if(isset($liste_recette_parcelle)) { ?>
+                                    <?php foreach($liste_recette_parcelle as $parcelle) { ?>
+                                        <tr>
+                                            <td><?=$parcelle["id_parcelle"] ?></td>
+                                            <td>Parcelle <?=$parcelle["id_parcelle"] ?></td>
+                                            <td><?=$parcelle["lanja"] ?> Kg</td>
+                                            <td><?=$parcelle["recette"] ?> Ar</td>
+                                            <td><?=$parcelle["additif"] ?></td>
+                                            <td><?=$parcelle["lanja_finale"] ?>Kg</td>
+                                            <td><?=$parcelle["recette_additif"] ?> Ar</td>
+                                        </tr>
+                                    <?php } ?>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main>
 <!-- End #main -->
 
 
@@ -266,13 +264,18 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+    <script src="<?php echo base_url("assets/vendor/apexcharts/apexcharts.min.js") ?>"></script>
     <script src="<?php echo base_url("assets/vendor/bootstrap/js/bootstrap.bundle.min.js") ?>"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js" integrity="sha256-t0FDfwj/WoMHIBbmFfuOtZv1wtA977QCfsFR3p1K4No=" crossorigin="anonymous"></script>
+    <script src="<?php echo base_url("assets/vendor/chart.js/chart.min.js") ?>"></script>
+    <script src="<?php echo base_url("assets/vendor/echarts/echarts.min.js") ?>"></script>
+    <script src="<?php echo base_url("assets/vendor/quill/quill.min.js") ?>"></script>
+    <script src="<?php echo base_url("assets/vendor/simple-datatables/simple-datatables.js") ?>"></script>
+    <script src="<?php echo base_url("assets/vendor/tinymce/tinymce.min.js") ?>"></script>
+    <script src="<?php echo base_url("assets/vendor/php-email-form/validate.js") ?>"></script>
 
     <!-- Template Main JS File -->
     <script src="<?php echo base_url("assets/js/main.js") ?>"></script>
+
 </body>
 
 </html>

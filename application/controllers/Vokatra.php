@@ -29,8 +29,6 @@ class Vokatra extends CI_Controller {
         }else{
             $additif = FALSE;
         }
-        var_dump($additif);
-        die;
         $this->Vokatra_model->save($id_parcelle, $tongony, $taolany, $lanja, $additif);
         redirect(base_url('vokatra?success'));
     }
@@ -40,5 +38,15 @@ class Vokatra extends CI_Controller {
         $liste_parcelle_vokatra = $this->Vokatra_model->get_lanja_vokatra();
         $data['liste_parcelle_vokatra'] = $liste_parcelle_vokatra;
         $this->load->view('parcelle-additif', $data);
+    }
+
+    public function recette_katsaka(){
+        $data = [];
+        if(count($_POST) > 0){
+            $date_recolte = $this->input->post('date_recolte');
+            $liste_recette_parcelle = $this->Vokatra_model->get_recette_vokatra($date_recolte);
+            $data['liste_recette_parcelle'] = $liste_recette_parcelle;
+        }
+        $this->load->view('recette_katsaka', $data);
     }
 }
