@@ -18,6 +18,28 @@ class Vokatra extends CI_Controller {
         $this->load->view('enregistrer-vokatra', $data);
     }
 
+    public function add(){
+        $this->load->model('Parcelle_model');
+        $parcelles = $this->Parcelle_model->get_liste_parcelle();
+        $liste_vokatra = $this->Vokatra_model->get_liste_vokatra();
+        $data = [];
+        $data['liste_vokatra'] = $liste_vokatra;
+        $data['parcelles'] = $parcelles;
+        $this->load->view('ajout-recolte', $data);
+    }
+
+    public function ajouter(){
+        $id_parcelle = $this->input->post('parcelle');
+        $lanja = $this->input->post('lanja');
+        if($lanja < 0){
+            redirect(base_url('vokatra/add?error'));
+        }
+        $vokatra = $this->Vokatra_model->get($id_parcelle);
+        $lanja = $lanja + $vokatra->lanja;
+        $this->Vokatra_model->savePlus($id_parcelle, $lanja);
+        redirect(base_url('vokatra/add?success'));
+    }
+
     public function enregistrer(){
         $id_parcelle = $this->input->post('parcelle');
         $tongony = $this->input->post('tongony');

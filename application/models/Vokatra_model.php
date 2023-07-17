@@ -25,6 +25,22 @@
             return $result;
         }
 
+        public function get($id_parcelle){
+            $this->load->database('default');
+            $sql = "SELECT * FROM vokatra WHERE id_parcelle = ?";
+            $result = $this->db->query($sql, array($id_parcelle));
+            $this->db->close();
+            return $result->row();
+        } 
+
+        public function savePlus($id_parcelle, $lanja){
+            $this->load->database('default');
+            $sql = "UPDATE vokatra SET lanja = ? WHERE id_parcelle = ?";
+            $result = $this->db->query($sql, array($lanja, $id_parcelle));
+            $this->db->close();
+            return $result;
+        }
+
         public function get_lanja_vokatra(){
             $liste_vokatra = $this->get_liste_vokatra();
             $this->load->model("Zezika_model");

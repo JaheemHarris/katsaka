@@ -21,12 +21,6 @@
 
     <!-- Vendor CSS Files -->
     <link href="<?php echo base_url("assets/vendor/bootstrap/css/bootstrap.min.css") ?>" rel="stylesheet">
-    <link href="<?php echo base_url("assets/vendor/bootstrap-icons/bootstrap-icons.css") ?>" rel="stylesheet">
-    <link href="<?php echo base_url("assets/vendor/boxicons/css/boxicons.min.css") ?>" rel="stylesheet">
-    <link href="<?php echo base_url("assets/vendor/quill/quill.snow.css") ?>" rel="stylesheet">
-    <link href="<?php echo base_url("assets/vendor/quill/quill.bubble.css") ?>" rel="stylesheet">
-    <link href="<?php echo base_url("assets/vendor/remixicon/remixicon.css") ?>" rel="stylesheet">
-    <link href="<?php echo base_url("assets/vendor/simple-datatables/style.css") ?>" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="<?php echo base_url("assets/css/style.css") ?>" rel="stylesheet">
@@ -41,197 +35,39 @@
 
 <body>
 
-    <!-- ======= Header ======= -->
-    <header id="header" class="header fixed-top d-flex align-items-center">
+<ul>
+    <li><a>Enregistrer Recolte</a></li>
+    <li><a>Efficacite zezika</a></li>
+    <li><a>Efficacite Combinaison zezika</a></li>
+    <li><a>Additif</a></li>
+    <li><a>Additif</a></li>
+</ul>
 
-        <div class="d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
-                <img src="<?php echo base_url("assets/img/logo.png") ?>" alt="">
-                <span class="d-none d-lg-block">Katsaka</span>
-            </a>
-            <i class="bi bi-list toggle-sidebar-btn"></i>
-        </div>
-        <!-- End Logo -->
+<h5 class="card-title">Efficacite Zezika</h5>
 
-        <!-- <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="POST" action="#">
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-            </form>
-        </div> -->
-        <!-- End Search Bar -->
-
-        <nav class="header-nav ms-auto">
-            <ul class="d-flex align-items-center">
-
-               
-                <!-- End Search Icon-->
-
-                
-                <!-- End Notification Nav -->
-
-                
-                <!-- End Messages Nav -->
-
-                <li class="nav-item dropdown pe-3">
-
-                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <!-- <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> -->
-                        <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $this->session->user_login ?></span>
-                    </a>
-                    <!-- End Profile Iamge Icon -->
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                        <li class="dropdown-header">
-                            <h6><?php echo $this->session->user_login ?></h6>
-                            <!-- <span>Web Designer</span> -->
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                                <i class="bi bi-person"></i>
-                                <span>Mon compte</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                                <i class="bi bi-gear"></i>
-                                <span>Paramètres</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <!-- <li>
-                            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                                <i class="bi bi-question-circle"></i>
-                                <span>Need Help?</span>
-                            </a>
-                        </li> -->
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="<?php echo base_url("user/logout") ?>">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <span>Se déconnecter</span>
-                            </a>
-                        </li>
-
-                    </ul>
-                    <!-- End Profile Dropdown Items -->
-                </li>
-                <!-- End Profile Nav -->
-
-            </ul>
-        </nav>
-        <!-- End Icons Navigation -->
-
-    </header>
-    <!-- End Header -->
-
-    <!-- ======= Sidebar ======= -->
-    <aside id="sidebar" class="sidebar">
-
-        <ul class="sidebar-nav" id="sidebar-nav">
-
-            <li class="nav-item">
-                <a class="nav-link " href="#">
-                    <i class="bi bi-grid"></i>
-                    <span>Accueil</span>
-                </a>
-            </li>
-            <!-- End Dashboard Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Zezika</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="<?php echo base_url('archive/new') ?>">
-                            <i class="bi bi-circle"></i><span>Enregistrement</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url('archive/search') ?>">
-                            <i class="bi bi-circle"></i><span>Efficacite</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <!-- End Components Nav -->
-
-        </ul>
-
-    </aside>
-    <!-- End Sidebar-->
-
-    <main id="main" class="main">
-
-    <div class="pagetitle">
-        <h1>Efficacite</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="<?php echo base_url('archive') ?>">Katsaka</a></li>
-                <li class="breadcrumb-item">Zezika</li>
-                <li class="breadcrumb-item active">Efficacite</li>
-            </ol>
-        </nav>
-    </div>
-    <!-- End Page Title -->
-
-    <section class="section">
-        <div class="row">
-            <div class="col-lg-12">
-
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Efficacite Zezika</h5>
-
-                        <div></div>
-
-                        <!-- Table with stripped rows -->
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">IdZezika</th>
-                                <th scope="col">Zezika</th>
-                                <th scope="col">Total Zezika </th>
-                                <th scope="col">Total Katsaka produit</th>
-                                <th scope="col">Efficacite</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach($liste_zezika as $zezika) { ?>
-                                    <tr>
-                                        <td><?=$zezika["id_zezika"] ?></td>
-                                        <td><?=$zezika["zezika"] ?></td>
-                                        <td><?=$zezika["total_produit"] ?> Kg</td>
-                                        <td><?=$zezika["total_quantite"] ?> Kg</td>
-                                        <td><?=$zezika["efficacite"] ?>Kg de katsaka/1kg de zezika </td>
-                                    </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                        <!-- End Table with stripped rows -->
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-</main>
+<!-- Table with stripped rows -->
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">IdZezika</th>
+        <th scope="col">Zezika</th>
+        <th scope="col">Total Zezika </th>
+        <th scope="col">Total Katsaka produit</th>
+        <th scope="col">Efficacite</th>
+    </tr>
+    </thead>
+    <tbody>
+        <?php foreach($liste_zezika as $zezika) { ?>
+            <tr>
+                <td><?=$zezika["id_zezika"] ?></td>
+                <td><?=$zezika["zezika"] ?></td>
+                <td><?=$zezika["total_produit"] ?> Kg</td>
+                <td><?=$zezika["total_quantite"] ?> Kg</td>
+                <td><?=$zezika["efficacite"] ?>Kg de mais/1kg de zezika </td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>
 <!-- End #main -->
 
 
